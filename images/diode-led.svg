@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Светодиод и токоограничивающий резистор</title>
+  <desc id="d">Схема: источник 5 вольт, резистор 220 ом и светодиод. Формула расчёта резистора: напряжение питания минус напряжение светодиода, делить на ток.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e3e8f0" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#2563eb"/>
+    </marker>
+    <marker id="light" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#f59e0b"/>
+    </marker>
+    <style>
+      .t { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; }
+      .m { font-family: 'Segoe UI', Arial, sans-serif; fill: #5a6678; }
+      .tag { font-family: Consolas, 'Courier New', monospace; fill: #b45309; letter-spacing: 2px; }
+      .f { font-family: Consolas, 'Courier New', monospace; fill: #172033; font-weight: 700; }
+      .lbl { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1200" height="750" fill="#f4f6fa"/>
+  <rect width="1200" height="750" fill="url(#grid)" opacity=".7"/>
+  <rect x="60" y="48" width="150" height="38" rx="19" fill="#e8f0ff" stroke="#93b4f5"/>
+  <text class="tag" x="82" y="74" font-size="19">СХЕМА</text>
+  <text class="t" x="60" y="145" font-size="44" font-weight="700">Светодиод без резистора — плохая идея</text>
+  <text class="m" x="60" y="184" font-size="24">Резистор задаёт ток. Без него светодиод может сгореть.</text>
+
+  <!-- circuit -->
+  <rect x="60" y="210" width="700" height="400" rx="22" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="90" y="252" class="lbl" font-size="27">Как включить</text>
+
+  <circle cx="105" cy="330" r="20" fill="#fff1e6" stroke="#b45309" stroke-width="3"/>
+  <text x="105" y="337" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="18" font-weight="700" fill="#b45309">5 В</text>
+  <path d="M125 330h45" stroke="#172033" stroke-width="4"/>
+  <rect x="170" y="311" width="130" height="38" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <text x="235" y="337" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="24" font-weight="700" fill="#7c2d12">220 Ω</text>
+  <path d="M300 330h80" stroke="#172033" stroke-width="4"/>
+
+  <path d="M380 268L380 392L444 330z" fill="#fca5a5" stroke="#b91c1c" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M444 268v124" stroke="#b91c1c" stroke-width="6" stroke-linecap="round"/>
+  <path d="M444 330h70v100" stroke="#172033" stroke-width="4" fill="none"/>
+
+  <path d="M548 430h-68M534 448h-40M520 466h-12" stroke="#172033" stroke-width="4" stroke-linecap="round"/>
+
+  <path d="M330 305h40" stroke="#2563eb" stroke-width="3" marker-end="url(#arr)"/>
+  <text x="350" y="294" text-anchor="middle" class="m" font-size="18">I</text>
+
+  <path d="M408 258l32-34M438 262l32-34" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" marker-end="url(#light)"/>
+
+  <text x="380" y="425" text-anchor="middle" class="lbl" font-size="22" fill="#b91c1c">анод +</text>
+  <text x="470" y="425" text-anchor="middle" class="lbl" font-size="22" fill="#475569">катод −</text>
+  <text x="470" y="270" class="m" font-size="18">свет</text>
+
+  <text x="125" y="520" class="m" font-size="19">Длинная ножка — анод (+), короткая — катод (−).</text>
+  <text x="125" y="550" class="m" font-size="19">Ток проходит только от анода к катоду.</text>
+
+  <!-- formula -->
+  <rect x="800" y="210" width="340" height="400" rx="22" fill="#fff7ed" stroke="#f0b27a" stroke-width="2"/>
+  <text x="828" y="252" class="m" font-size="19" letter-spacing="1">РАСЧЁТ РЕЗИСТОРА</text>
+  <text x="828" y="300" class="f" font-size="26">R = (Uпит − Uled) / I</text>
+  <path d="M828 322h284" stroke="#f0b27a" stroke-width="2"/>
+  <text x="828" y="360" class="m" font-size="19">Uпит — питание, В</text>
+  <text x="828" y="390" class="m" font-size="19">Uled — падение на LED, В</text>
+  <text x="828" y="420" class="m" font-size="19">I — нужный ток, А</text>
+  <text x="828" y="472" class="f" font-size="22">(5 − 2) / 0,015 ≈ 200 Ом</text>
+  <text x="828" y="506" class="m" font-size="19">Берём ближайший больший:</text>
+  <text x="828" y="536" class="f" font-size="24">220 Ом</text>
+  <text x="828" y="574" class="m" font-size="17">Мощность: P = I² × R ≈ 0,05 Вт</text>
+</svg>

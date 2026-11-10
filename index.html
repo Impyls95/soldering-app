@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Пайка с нуля — курс для начинающих радиолюбителей</title>
+  <meta name="description" content="Адаптивный офлайн-курс по пайке и основам электроники: инструменты, закон Ома, резисторы, конденсаторы, диоды, транзисторы, практика и мини-тест.">
+  <meta name="theme-color" content="#f4f1ea">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Пайка с нуля">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('soldering-theme');
+        var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (saved === 'dark' || saved === 'light') ? saved : (systemDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0c1117' : '#f4f1ea');
+      } catch (error) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Пайка с нуля — в начало">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20l5-1 9-9-4-4-9 9-1 5z"/>
+            <path d="M14 6l4 4"/>
+            <path d="M17 3l4 4"/>
+            <path d="M6 14l4 4"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Пайка с нуля</strong>
+          <small>электроника · практика</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#intro">Старт</a>
+        <a href="#tools">Инструменты</a>
+        <a href="#basics">Теория</a>
+        <a href="#practice">Практика</a>
+        <a href="#quiz">Тест</a>
+      </nav>
+
+      <div class="header-actions">
+        <span class="status-pill" id="net-status" data-state="online" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-label">Онлайн</span>
+        </span>
+        <button class="btn-install" id="install-btn" type="button" aria-label="Установить приложение" hidden>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/>
+          </svg>
+          <span>Установить</span>
+        </button>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Включить тёмную тему">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  </header>
+
+  <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+  <aside class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-labelledby="mobile-nav-title" aria-hidden="true">
+    <div class="mobile-nav-head">
+      <span id="mobile-nav-title">Содержание курса</span>
+      <button class="icon-btn" id="menu-close" type="button" aria-label="Закрыть меню">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-progress">
+      <div class="progress-line"><span id="mobile-progress-text">0 из 14</span><span id="mobile-progress-pct">0%</span></div>
+      <div class="progress-track" role="progressbar" aria-label="Прогресс курса" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progress-track>
+        <span data-progress-bar></span>
+      </div>
+    </div>
+    <nav class="mobile-nav-scroll" aria-label="Разделы курса">
+      <ol class="nav-list" id="mobile-nav-list"></ol>
+    </nav>
+  </aside>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Курс для начинающих радиолюбителей</p>
+          <h1 id="hero-title">Научись паять <span>с нуля</span></h1>
+          <p class="hero-lead">Короткая теория, понятные схемы и практика: от первого паяного провода до мигалки на транзисторе. Без воды и сложных формул.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#intro">
+              Начать обучение
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#quiz">Проверить себя</a>
+          </div>
+          <dl class="hero-stats">
+            <div><dt>Разделов</dt><dd>14</dd></div>
+            <div><dt>Время</dt><dd>~40 мин</dd></div>
+            <div><dt>Вопросов</dt><dd>7</dd></div>
+            <div><dt>Офлайн</dt><dd>100%</dd></div>
+          </dl>
+        </div>
+
+        <aside class="hero-card" aria-labelledby="progress-title">
+          <div class="hero-card-top">
+            <span class="chip">Личный прогресс</span>
+            <span class="chip chip-ghost" id="hero-status">В начале пути</span>
+          </div>
+          <div class="ring-wrap" id="progress-ring" role="progressbar" aria-labelledby="progress-title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+              <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="ring-label"><strong id="hero-pct">0%</strong><span>изучено</span></div>
+          </div>
+          <h2 id="progress-title">Твой прогресс</h2>
+          <p class="hero-progress-text" id="hero-progress-text">0 из 14 разделов · отметь первый</p>
+          <div class="progress-track" role="progressbar" aria-label="Прогресс курса" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progress-track>
+            <span id="hero-progress-bar" data-progress-bar></span>
+          </div>
+          <button class="btn btn-ghost btn-full" type="button" data-reset>Начать заново</button>
+        </aside>
+      </div>
+    </section>
+
+    <div class="course-layout">
+      <aside class="course-sidebar" aria-label="Содержание курса">
+        <div class="sidebar-card">
+          <div class="sidebar-head">
+            <p>Содержание</p>
+            <span class="badge badge-soft" id="sidebar-count">14</span>
+          </div>
+          <nav aria-label="Разделы курса">
+            <ol class="nav-list" id="sidebar-nav"></ol>
+          </nav>
+          <div class="sidebar-progress">
+            <div class="progress-line"><span id="sidebar-progress-text">0 из 14</span><span id="sidebar-progress-pct">0%</span></div>
+            <div class="progress-track" role="progressbar" aria-label="Прогресс курса" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progress-track>
+              <span id="sidebar-progress-bar" data-progress-bar></span>
+            </div>
+            <button class="link-btn" type="button" data-reset>Сбросить прогресс</button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="course-content">
+        <!-- 01 -->
+        <section class="lesson lesson--split" id="intro" data-lesson="intro" data-title="Что такое пайка и зачем она нужна" data-short="Что такое пайка" data-group="Старт">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>01</span>
+              <span class="lesson-group">Старт</span>
+              <span class="lesson-time">3 мин</span>
+            </div>
+            <h2>Что такое пайка и зачем она нужна</h2>
+            <button class="complete-btn" type="button" data-complete="intro" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Пайка — это соединение металлических деталей расплавленным припоем. В электронике она нужна, чтобы собрать схему, заменить деталь или починить провод.</p>
+              <p>Паяльник нагревает место соединения до 300–350&nbsp;°C. Припой — сплав на основе олова — плавится, растекается по металлу, заполняет зазор и после остывания держит деталь и проводит ток.</p>
+              <p>Это не сварка: основной металл не плавится. Мы как бы «приклеиваем» детали металлом с низкой температурой плавления. Поэтому паять можно тонкие провода и нежную электронику — если не перегревать.</p>
+              <h3>Где это пригодится</h3>
+              <ul class="checklist">
+                <li>Собрать первую плату или модуль на макетке.</li>
+                <li>Заменить сгоревший конденсатор или разъём.</li>
+                <li>Припаять провод к кнопке, динамику, светодиоду.</li>
+                <li>Сделать проект на Arduino, ESP32 или Raspberry Pi.</li>
+                <li>Починить наушники, зарядку, гирлянду.</li>
+              </ul>
+              <div class="callout callout--tip">
+                <p class="callout-title">С чего начать</p>
+                <p>С проводов и простых плат. Микросхемы и SMD-компоненты — позже, когда рука привыкнет держать паяльник и чувствовать температуру.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="soldering-iron"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 02 -->
+        <section class="lesson" id="safety" data-lesson="safety" data-title="Техника безопасности" data-short="Техника безопасности" data-group="Старт">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>02</span>
+              <span class="lesson-group">Старт</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Техника безопасности</h2>
+            <button class="complete-btn" type="button" data-complete="safety" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Жало паяльника — 300–350&nbsp;°C. Это в три с лишним раза горячее кипятка: ожог возникает мгновенно, а дым от флюса раздражает дыхательные пути.</p>
+              <p>Правила простые, но нарушать их нельзя — особенно новичку.</p>
+              <ul class="checklist checklist--warn">
+                <li><strong>Только подставка.</strong> Клади паяльник на металлическую подставку, а не на стол, ткань или край платы.</li>
+                <li><strong>Держи за рукоятку.</strong> Перед включением проверь провод и изоляцию. Не тяни за кабель, чтобы вынуть вилку.</li>
+                <li><strong>Проветривай.</strong> Работай у открытого окна или с вытяжкой. Не наклоняй голову над платой — дым поднимается вверх.</li>
+                <li><strong>Мой руки.</strong> В свинцовом припое есть свинец. После работы — мыло, не ешь и не пей за столом.</li>
+                <li><strong>Защищай глаза.</strong> При обрезке выводов надевай очки: кусочки проволоки отлетают как пружинки.</li>
+                <li><strong>Не паяй под напряжением.</strong> Плату и устройство сначала обесточь.</li>
+                <li><strong>Выключай.</strong> Уходя, вынь вилку из розетки. Паяльник без присмотра — пожар.</li>
+              </ul>
+              <div class="callout callout--warn">
+                <p class="callout-title">Если что-то пошло не так</p>
+                <p>Припой на коже не отдирай: охлаждай прохладной водой 10–15 минут. При запахе гари или дыме — выключи прибор и проветри помещение. Не лей воду на включённый паяльник.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="safety"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 03 -->
+        <section class="lesson lesson--split" id="tools" data-lesson="tools" data-title="Инструменты" data-short="Инструменты" data-group="Инструменты">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>03</span>
+              <span class="lesson-group">Инструменты</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Инструменты: что для чего</h2>
+            <button class="complete-btn" type="button" data-complete="tools" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Для старта не нужна мастерская. Достаточно небольшого набора — главное, чтобы паяльник держал температуру, а припой был свежим.</p>
+              <div class="tool-grid">
+                <article class="tool-card"><span class="tool-tag">01</span><h3>Паяльник</h3><p>30–60 Вт, желательно с регулировкой температуры. Тонкое жало удобно для плат, толстое — для проводов.</p></article>
+                <article class="tool-card"><span class="tool-tag">02</span><h3>Паяльная станция</h3><p>Точная температура, сменные жала, иногда фен для SMD. Удобно, но для первых шагов не обязательно.</p></article>
+                <article class="tool-card"><span class="tool-tag">03</span><h3>Припой</h3><p>Sn60Pb40 плавится около 190&nbsp;°C и прощает ошибки. Бессвинцовый SAC305 — около 217&nbsp;°C, экологичнее, но сложнее. Диаметр 0,6–1&nbsp;мм для плат.</p></article>
+                <article class="tool-card"><span class="tool-tag">04</span><h3>Флюс</h3><p>Канифоль, гель или флюс-карандаш. Помогает припою смачивать металл и убирает окислы. Паяльная кислота для электроники не подходит.</p></article>
+                <article class="tool-card"><span class="tool-tag">05</span><h3>Пинцет</h3><p>Держать провода, перемычки и SMD-детали. Пальцами горячую деталь лучше не трогать.</p></article>
+                <article class="tool-card"><span class="tool-tag">06</span><h3>Бокорезы</h3><p>Обрезать выводы после пайки. Не кусай сталь и толстые винты — испортишь кромки.</p></article>
+                <article class="tool-card"><span class="tool-tag">07</span><h3>Оплётка</h3><p>Медная косичка, которая впитывает лишний припой. Нагрей место и промокни — дорожки останутся целыми.</p></article>
+                <article class="tool-card"><span class="tool-tag">08</span><h3>«Третья рука»</h3><p>Держатель с зажимами и лупой. Освобождает обе руки для паяльника и припоя.</p></article>
+              </div>
+              <p><strong>Ещё пригодятся:</strong> мультиметр, изопропиловый спирт и щётка, термоусадка, медная губка для чистки жала, вытяжка.</p>
+              <div class="callout callout--tip">
+                <p class="callout-title">Не гонись за ценой</p>
+                <p>Хороший паяльник с регулировкой, нормальный припой и флюс важнее дорогой станции. Дешёвый припой с плохим флюсом испортит больше, чем сэкономит.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="third-hand"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 04 -->
+        <section class="lesson" id="basics" data-lesson="basics" data-title="Напряжение, ток и сопротивление" data-short="Напряжение и ток" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>04</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">3 мин</span>
+            </div>
+            <h2>Напряжение, ток и сопротивление</h2>
+            <button class="complete-btn" type="button" data-complete="basics" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Три величины описывают почти любую цепь. Проще всего представить воду в трубах.</p>
+              <div class="concept-grid">
+                <article class="concept-card"><span class="concept-symbol">U</span><h3>Напряжение</h3><p>«Давление» источника, которое толкает заряды. Измеряется в вольтах (В).</p></article>
+                <article class="concept-card"><span class="concept-symbol">I</span><h3>Ток</h3><p>Сколько зарядов проходит через провод за секунду. Измеряется в амперах (А).</p></article>
+                <article class="concept-card"><span class="concept-symbol">R</span><h3>Сопротивление</h3><p>Насколько материал мешает току. Измеряется в омах (Ом).</p></article>
+              </div>
+              <p>Чем больше напряжение, тем сильнее ток при том же сопротивлении. Чем уже «труба», тем слабее поток. В электрической цепи должен быть замкнутый путь: разорвали цепь — ток остановился.</p>
+              <p>Батарейка, USB и блок питания дают <strong>постоянный ток</strong> (DC). Розетка 230&nbsp;В — <strong>переменный</strong> (AC, 50&nbsp;Гц). В электронике чаще работают с постоянным током.</p>
+              <p class="unit-note">1 кОм = 1000 Ом &nbsp;·&nbsp; 1 мА = 0,001 А &nbsp;·&nbsp; 1 мкФ = 0,000001 Ф</p>
+              <div class="callout callout--formula">
+                <p class="callout-title">Главная мысль</p>
+                <p>Ток не «расходуется» по пути. В последовательной цепи он одинаков везде: сколько зарядов вошло, столько и вышло.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="water-analogy"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 05 -->
+        <section class="lesson" id="ohm" data-lesson="ohm" data-title="Закон Ома" data-short="Закон Ома" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>05</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Закон Ома</h2>
+            <button class="complete-btn" type="button" data-complete="ohm" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Закон Ома связывает напряжение, ток и сопротивление одной формулой. Зная две величины, всегда можно найти третью.</p>
+              <div class="formula-box">
+                <span class="formula">U = I × R</span>
+                <span class="formula">I = U / R</span>
+                <span class="formula">R = U / I</span>
+              </div>
+              <p><strong>Пример.</strong> Батарейка 9&nbsp;В, резистор 450&nbsp;Ом. Ток: I = 9 / 450 = 0,02&nbsp;А = 20&nbsp;мА. Если нужен меньший ток — увеличиваем сопротивление. Если больший — уменьшаем.</p>
+              <p>У резистора есть ещё мощность. Она показывает, сколько тепла он рассеивает: <span class="formula-inline">P = U × I = I² × R</span>.</p>
+              <p>В примере: P = 0,02² × 450 = 0,18&nbsp;Вт. Значит, резистор на 0,125&nbsp;Вт будет греться, а на 0,25&nbsp;Вт — подойдёт с запасом.</p>
+              <div class="callout callout--formula">
+                <p class="callout-title">Проверка на пальцах</p>
+                <p>Больше сопротивление → меньше ток. Больше напряжение → больше ток. Это и есть закон Ома.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="ohm-law"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 06 -->
+        <section class="lesson" id="resistors" data-lesson="resistors" data-title="Резисторы: последовательно и параллельно" data-short="Резисторы" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>06</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Резисторы: последовательно и параллельно</h2>
+            <button class="complete-btn" type="button" data-complete="resistors" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Резистор ограничивает ток и делит напряжение. Это самый частый компонент после проводов.</p>
+              <h3>Последовательно</h3>
+              <p>Резисторы идут друг за другом, ток через них одинаковый. Сопротивления складываются:</p>
+              <p class="formula-line">R = R1 + R2</p>
+              <p>Два по 100&nbsp;Ом дадут 200&nbsp;Ом. Напряжение делится пропорционально сопротивлениям.</p>
+              <h3>Параллельно</h3>
+              <p>Резисторы подключены к одним и тем же точкам, напряжение на них одинаковое, токи складываются. Общее сопротивление всегда меньше самого маленького:</p>
+              <p class="formula-line">1/R = 1/R1 + 1/R2</p>
+              <p>Два по 100&nbsp;Ом параллельно — это 50&nbsp;Ом. Удобно, когда нужного номинала нет под рукой.</p>
+              <h3>Маркировка и мощность</h3>
+              <p>На «бочонках» — цветные полосы, на SMD — код вроде <strong>103</strong> (10&nbsp;кОм). Надёжнее всего проверить мультиметром. Для LED и делителей обычно хватает 0,25&nbsp;Вт.</p>
+              <div class="callout callout--warn">
+                <p class="callout-title">Не путай</p>
+                <p>Последовательно — складываем сопротивление. Параллельно — складываем проводимость, поэтому итог меньше меньшего.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="resistors"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 07 -->
+        <section class="lesson" id="capacitors" data-lesson="capacitors" data-title="Конденсаторы" data-short="Конденсаторы" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>07</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Конденсаторы</h2>
+            <button class="complete-btn" type="button" data-complete="capacitors" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Конденсатор — две обкладки с диэлектриком между ними. Он запасает заряд и энергию, как маленький аккумулятор, но заряжается и отдаёт энергию очень быстро.</p>
+              <p>Когда подаём напряжение, конденсатор заряжается: ток идёт, пока напряжение на нём не сравняется с питанием. Дальше постоянный ток через него не течёт. Переменный ток конденсатор пропускает — поэтому его ставят для фильтрации и развязки.</p>
+              <h3>Где нужен</h3>
+              <ul class="checklist">
+                <li>Сглаживает пульсации после выпрямителя.</li>
+                <li>Стоит рядом с микросхемой по питанию (0,1&nbsp;мкФ) и гасит помехи.</li>
+                <li>Задаёт время в таймерах и генераторах.</li>
+                <li>Разделяет постоянную и переменную составляющие сигнала.</li>
+              </ul>
+              <p>Ёмкость измеряется в фарадах (Ф), на практике — микрофарады (мкФ), нанофарады (нФ) и пикофарады (пФ). Напряжение конденсатора должно быть выше рабочего, лучше с запасом 1,5–2 раза.</p>
+              <p><strong>Полярность.</strong> Электролитические конденсаторы полярные: минус отмечен светлой полосой. Перепутаешь — может вздуться и выйти из строя. Керамические и плёночные — неполярные.</p>
+              <p>Время заряда связано с сопротивлением: <span class="formula-inline">τ = R × C</span>. За одну τ конденсатор заряжается на 63&nbsp;%, за пять τ — почти полностью.</p>
+              <div class="callout callout--warn">
+                <p class="callout-title">Осторожно</p>
+                <p>Большой конденсатор в блоке питания может оставаться заряженным после выключения. Перед работой разряди его резистором, а не отвёрткой.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="capacitor"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 08 -->
+        <section class="lesson" id="diodes" data-lesson="diodes" data-title="Диоды и светодиоды" data-short="Диоды и LED" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>08</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Диоды и светодиоды</h2>
+            <button class="complete-btn" type="button" data-complete="diodes" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Диод пропускает ток в одну сторону и не пускает обратно. Это «клапан» для электричества.</p>
+              <p>У кремниевого диода прямое падение напряжения около 0,6–0,7&nbsp;В, у диода Шоттки — 0,2–0,3&nbsp;В. В обратном направлении он закрыт и почти не проводит ток. Диоды защищают от переполюсовки, выпрямляют переменный ток, гасят индуктивные выбросы.</p>
+              <h3>Светодиод</h3>
+              <p>LED — тоже диод, только при прохождении тока он светится. Напряжение зависит от цвета: красный — около 1,8–2,2&nbsp;В, зелёный — 2–2,4&nbsp;В, синий и белый — 3–3,3&nbsp;В. Рабочий ток обычно 10–20&nbsp;мА.</p>
+              <p>Без токоограничивающего резистора светодиод быстро сгорит. Расчёт:</p>
+              <div class="formula-box">
+                <span class="formula">R = (Uпит − Uled) / I</span>
+              </div>
+              <p><strong>Пример:</strong> 5&nbsp;В, красный LED на 2&nbsp;В, ток 15&nbsp;мА. R = (5 − 2) / 0,015 = 200&nbsp;Ом. Берём ближайший больший из стандартных — 220&nbsp;Ом. Мощность: P = 3 × 0,015 = 0,045&nbsp;Вт, подойдёт любой маломощный резистор.</p>
+              <p><strong>Полярность:</strong> анод «+» — длинная ножка, катод «−» — короткая и срез на корпусе.</p>
+              <div class="callout callout--warn">
+                <p class="callout-title">Не подключай LED напрямую</p>
+                <p>К батарейке без резистора — почти гарантированная замена светодиода. Резистор обязателен, даже если «на секундочку».</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="diode-led"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 09 -->
+        <section class="lesson" id="transistors" data-lesson="transistors" data-title="Транзисторы" data-short="Транзисторы" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>09</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">6 мин</span>
+            </div>
+            <h2>Транзисторы</h2>
+            <button class="complete-btn" type="button" data-complete="transistors" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Транзистор — управляемый вентиль. Слабым сигналом он управляет сильным током: может работать как переключатель или как усилитель.</p>
+              <h3>Биполярный транзистор (BJT)</h3>
+              <p>Три вывода: <strong>база (Б)</strong>, <strong>коллектор (К)</strong>, <strong>эмиттер (Э)</strong>. В NPN ток базы открывает путь от коллектора к эмиттеру. В PNP всё наоборот: база «притягивает» к минусу. Стрелка на эмиттере показывает направление тока: у NPN — наружу, у PNP — внутрь.</p>
+              <div class="pin-grid">
+                <div class="pin-card"><span class="pin-letter">Б</span><h3>База</h3><p>Управляющий вход. Через резистор 1–10&nbsp;кОм от микроконтроллера.</p></div>
+                <div class="pin-card"><span class="pin-letter">К</span><h3>Коллектор</h3><p>Сюда подключают нагрузку: лампу, реле, мотор, светодиод.</p></div>
+                <div class="pin-card"><span class="pin-letter">Э</span><h3>Эмиттер</h3><p>У NPN обычно на землю. Общий вывод для тока нагрузки.</p></div>
+              </div>
+              <p><strong>Как переключатель:</strong> выход микроконтроллера 3&nbsp;В → резистор → база; коллектор → нагрузка → плюс питания; эмиттер → земля. Ток коллектора примерно в β раз больше тока базы: при β = 100 и 1&nbsp;мА в базе получим до 100&nbsp;мА в коллекторе. Но лучше брать запас и не работать на пределе.</p>
+              <p><strong>Как усилитель:</strong> небольшое изменение тока базы вызывает большое изменение тока коллектора. Так усиливают звук и слабые сигналы датчиков.</p>
+
+              <h3>PNP: зеркальный вариант</h3>
+              <p>У PNP эмиттер подключают к плюсу питания, коллектор — к нагрузке, а база открывает транзистор, когда её через резистор притягивают к минусу. Стрелка на эмиттере смотрит внутрь. PNP удобен для коммутации плюсового провода; для первых опытов бери NPN — он проще и дешевле.</p>
+
+              <h3>Полевой транзистор (MOSFET)</h3>
+              <p>Три вывода: <strong>затвор (З)</strong>, <strong>сток (С)</strong>, <strong>исток (И)</strong>. Затвор изолирован, поэтому управляется напряжением и почти не потребляет ток. N-канальный MOSFET открывается, когда напряжение на затворе превышает порог (обычно 2–4&nbsp;В).</p>
+              <p>P-канальный MOSFET — зеркальный: открывается, когда затвор ниже истока, и обычно стоит в плюсовом проводе. В усилительном режиме небольшое изменение напряжения на затворе меняет ток стока.</p>
+              <p>В схеме «низкого ключа» его ставят в минусовой провод нагрузки: сток — к нагрузке, исток — к земле. Открытый канал имеет сопротивление <span class="formula-inline">Rds(on)</span>: чем оно меньше, тем меньше нагрев.</p>
+              <p>Обязательный элемент — резистор 10&nbsp;кОм между затвором и истоком. Он не даёт транзистору открыться от помех, пока микроконтроллер не подал сигнал. Для мотора или реле добавляют защитный диод.</p>
+
+              <div class="table-wrap">
+                <table class="compare-table">
+                  <thead><tr><th>Параметр</th><th>BJT</th><th>MOSFET</th></tr></thead>
+                  <tbody>
+                    <tr><td>Управление</td><td>током базы</td><td>напряжением на затворе</td></tr>
+                    <tr><td>Потребление входа</td><td>несколько мА</td><td>почти ноль</td></tr>
+                    <tr><td>Типичное применение</td><td>малые сигналы, усиление</td><td>силовые ключи, ШИМ, моторы</td></tr>
+                    <tr><td>Простота для новичка</td><td>высокая</td><td>средняя</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout--formula">
+                <p class="callout-title">Запомни</p>
+                <p>Транзистор не создаёт энергию. Он лишь открывает и закрывает путь току от источника питания. Усиление — это управление большой энергией малым сигналом.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="transistor-npn"></div>
+              <div class="figure-slot" data-image="transistor-mosfet"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 10 -->
+        <section class="lesson" id="divider" data-lesson="divider" data-title="Делитель напряжения" data-short="Делитель напряжения" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>10</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">3 мин</span>
+            </div>
+            <h2>Делитель напряжения</h2>
+            <button class="complete-btn" type="button" data-complete="divider" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Два резистора последовательно — и напряжение делится в заданной пропорции. Это одна из самых полезных схем для начинающего.</p>
+              <p>Входное напряжение подаётся на верхний резистор R1, выход снимается с середины, нижний R2 соединён с землёй:</p>
+              <p class="formula-line">Uвых = Uвх × R2 / (R1 + R2)</p>
+              <p><strong>Пример:</strong> 12&nbsp;В, R1 = 10&nbsp;кОм, R2 = 3,3&nbsp;кОм. Uвых = 12 × 3,3 / 13,3 ≈ 2,98&nbsp;В. Так можно подать сигнал 12&nbsp;В на вход микроконтроллера, который рассчитан на 3,3&nbsp;В.</p>
+              <p>Делитель подходит для сигнала, опорного напряжения и измерений. Для питания нагрузки он не годится: как только нагрузка начинает потреблять ток, выход «проседает».</p>
+              <p>Ток через делитель: I = 12 / 13,3&nbsp;кОм ≈ 0,9&nbsp;мА. Чем меньше сопротивления, тем стабильнее выход, но тем больше расход энергии.</p>
+              <div class="callout callout--tip">
+                <p class="callout-title">Проверь мультиметром</p>
+                <p>Собери делитель на макетке и измерь выход. Если он сильно отличается от расчёта — проверь номиналы и не подключена ли нагрузка.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="voltage-divider"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 11 -->
+        <section class="lesson" id="blinker" data-lesson="blinker" data-title="Мигалка на транзисторе" data-short="Мигалка" data-group="Теория">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>11</span>
+              <span class="lesson-group">Теория</span>
+              <span class="lesson-time">5 мин</span>
+            </div>
+            <h2>Простейшая схема: мигалка</h2>
+            <button class="complete-btn" type="button" data-complete="blinker" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Два транзистора, два конденсатора и четыре резистора — и светодиоды мигают по очереди. Это классический мультивибратор.</p>
+              <p>Конденсаторы поочерёдно заряжаются и закрывают противоположный транзистор. Пока один транзистор открыт, горит его светодиод; конденсатор перезаряжается — и транзисторы меняются ролями. Процесс повторяется сам, без микроконтроллера.</p>
+              <p><strong>Что понадобится:</strong> 2 NPN-транзистора (например, 2N3904 или BC547), R1 и R3 по 470&nbsp;Ом, R2 и R4 по 10&nbsp;кОм, C1 и C2 по 100&nbsp;мкФ, два светодиода, питание 9&nbsp;В. В этой схеме LED включены в цепи эмиттеров.</p>
+              <p>Период мигания примерно <span class="formula-inline">T ≈ 1,4 × R × C</span>. Для 10&nbsp;кОм и 100&nbsp;мкФ: T ≈ 1,4&nbsp;с, частота около 0,7&nbsp;Гц. Уменьши ёмкость — мигает быстрее.</p>
+              <p>Собирай на макетной плате, проверяй полярность электролитов и светодиодов. Если не мигает — проверь питание, ориентацию транзисторов и контакты.</p>
+              <div class="callout callout--tip">
+                <p class="callout-title">Первая настоящая схема</p>
+                <p>Она отлично тренирует чтение схемы, монтаж и поиск ошибок. Не спеши: одна неверная ножка — и схема молчит.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="blinker"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 12 -->
+        <section class="lesson lesson--split" id="practice" data-lesson="practice" data-title="Практика пайки" data-short="Практика пайки" data-group="Практика">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>12</span>
+              <span class="lesson-group">Практика</span>
+              <span class="lesson-time">6 мин</span>
+            </div>
+            <h2>Практика пайки</h2>
+            <button class="complete-btn" type="button" data-complete="practice" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Главное правило: греть нужно деталь и площадку, а не припой. Припой плавится от нагретого металла и сам затекает в соединение.</p>
+              <h3>Подготовка жала</h3>
+              <p>Включи паяльник на 300–350&nbsp;°C. Дождись нагрева, очисти жало медной стружкой или влажной губкой. Нанеси немного припоя и распредели по рабочей поверхности — это лужение. Жало должно блестеть.</p>
+              <p>Для бессвинцового припоя температуру поднимают до 350–380&nbsp;°C: он плавится выше и хуже смачивает. Но не держи жало на одной точке дольше 2–3&nbsp;секунд.</p>
+              <p>Если припой не липнет, жало окислилось или остыло. Почисти, добавь флюс и повтори. Не стачивай жало напильником — снимаешь защитное покрытие.</p>
+              <h3>Пайка проводов</h3>
+              <ol class="steps">
+                <li>Зачисти провод на 5–8&nbsp;мм, не перерезая жилы.</li>
+                <li>Облуди оба конца: нагрей, подай припой, дай остыть.</li>
+                <li>Надень термоусадку <em>до</em> пайки.</li>
+                <li>Соедини концы внахлёст, прогрей 1–2&nbsp;секунды.</li>
+                <li>Подай припой в место контакта, убери припой, затем паяльник.</li>
+                <li>Не двигай соединение, пока припой не застынет. Надень термоусадку и прогрей её.</li>
+              </ol>
+              <h3>Пайка на плате</h3>
+              <p>Вставь вывод в отверстие. Прогрей площадку и вывод одновременно 1–2&nbsp;секунды, подай припой в точку их контакта. Припой должен образовать вогнутую воронку. Убери припой, потом паяльник. Лишний вывод обрежь бокорезами после остывания.</p>
+              <p>Для SMD: нанеси флюс, залуди одну площадку, припаяй деталь пинцетом, затем вторую сторону. Не перегревай керамику и пластик.</p>
+              <div class="callout callout--formula">
+                <p class="callout-title">Формула хорошей пайки</p>
+                <p>Чистая поверхность + флюс + достаточное тепло + неподвижность при остывании. Всё остальное — практика.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="soldering-pcb"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 13 -->
+        <section class="lesson" id="mistakes" data-lesson="mistakes" data-title="Типичные ошибки" data-short="Типичные ошибки" data-group="Практика">
+          <header class="lesson-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>13</span>
+              <span class="lesson-group">Практика</span>
+              <span class="lesson-time">4 мин</span>
+            </div>
+            <h2>Типичные ошибки</h2>
+            <button class="complete-btn" type="button" data-complete="mistakes" aria-pressed="false">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Отметить</span>
+            </button>
+          </header>
+          <div class="lesson-body">
+            <div class="lesson-text">
+              <p class="lesson-lead">Почти все ошибки новичка повторяются из раза в раз. Научись узнавать их по виду — и переделывать станет проще.</p>
+              <div class="mistake-grid">
+                <article class="mistake-card">
+                  <h3>Холодная пайка</h3>
+                  <p>Матовый бугристый шарик, вывод качается, контакт пропадает. Причина — мало тепла или деталь сдвинули при остывании.</p>
+                  <p class="mistake-fix">Лечение: флюс, прогреть 1–2&nbsp;с, дать припою заново расплавиться и застыть без движения.</p>
+                </article>
+                <article class="mistake-card">
+                  <h3>Перегрев</h3>
+                  <p>Дорожка отслоилась, пластик оплавился, деталь почернела. Причина — 400&nbsp;°C и долгий контакт.</p>
+                  <p class="mistake-fix">Лечение: 300–350&nbsp;°C, не больше 2–3&nbsp;секунд, чувствительные детали — с теплоотводом.</p>
+                </article>
+                <article class="mistake-card">
+                  <h3>«Сопли» и перемычки</h3>
+                  <p>Лишний припой соединил соседние площадки. Получился короткий путь там, где его быть не должно.</p>
+                  <p class="mistake-fix">Лечение: добавь флюс и убери припой оплёткой. Проверь соединение мультиметром.</p>
+                </article>
+                <article class="mistake-card">
+                  <h3>Мало припоя</h3>
+                  <p>Шарик не обхватил вывод, соединение держится на честном слове. От вибрации легко треснет.</p>
+                  <p class="mistake-fix">Лечение: добавь немного припоя и прогревай, пока не получится воронка.</p>
+                </article>
+                <article class="mistake-card">
+                  <h3>Припой не смачивает</h3>
+                  <p>Поверхность грязная или окисленная, припой собирается каплей и не растекается.</p>
+                  <p class="mistake-fix">Лечение: зачистить, обезжирить спиртом, добавить флюс и прогреть.</p>
+                </article>
+                <article class="mistake-card">
+                  <h3>Сдвиг при остывании</h3>
+                  <p>Трещины в припое и «холодный» контакт. Часто случается, когда деталь держат пальцами.</p>
+                  <p class="mistake-fix">Лечение: зафиксируй деталь «третьей рукой» или пинцетом и не двигай 1–2&nbsp;секунды.</p>
+                </article>
+              </div>
+              <div class="callout callout--tip">
+                <p class="callout-title">Хороший признак</p>
+                <p>Блестящая гладкая воронка, припой обхватывает вывод, деталь не качается. Бессвинцовый припой может быть матовым — смотри на форму и смачивание, а не только на блеск. Если сомневаешься — лучше перепаять, чем оставить непредсказуемый контакт.</p>
+              </div>
+            </div>
+            <div class="lesson-figures">
+              <div class="figure-slot" data-image="solder-joints"></div>
+            </div>
+          </div>
+          <footer class="lesson-foot"></footer>
+        </section>
+
+        <!-- 14 -->
+        <section class="quiz-section" id="quiz" data-lesson="quiz" data-title="Мини-тест" data-short="Мини-тест" data-group="Проверка">
+          <header class="quiz-head">
+            <div class="lesson-kicker">
+              <span class="lesson-num" data-num>14</span>
+              <span class="lesson-group">Проверка</span>
+              <span class="lesson-time">5 мин</span>
+            </div>
+            <h2>Мини-тест</h2>
+            <p class="lesson-lead">Семь вопросов без подвоха. Выбери один вариант в каждом — в конце увидишь разбор и сможешь пройти ещё раз.</p>
+            <div class="quiz-meta">
+              <span class="badge" id="quiz-best">Лучший результат: —</span>
+              <span class="badge badge-soft">Проходной балл: 5 из 7</span>
+            </div>
+          </header>
+          <div class="quiz-layout">
+            <form class="quiz-form" id="quiz-form" novalidate>
+              <div id="quiz-questions"></div>
+              <div class="quiz-actions">
+                <p class="quiz-status" id="quiz-status" role="status" aria-live="polite"></p>
+                <div class="quiz-buttons">
+                  <button class="btn btn-primary" type="submit" id="quiz-submit">Проверить ответы</button>
+                  <button class="btn btn-ghost" type="button" id="quiz-retry" hidden>Пройти ещё раз</button>
+                </div>
+              </div>
+              <div class="quiz-result" id="quiz-result" hidden aria-live="polite">
+                <div class="quiz-score-wrap">
+                  <p class="quiz-score"><strong id="quiz-score">0</strong><span>/ 7</span></p>
+                  <span class="quiz-verdict-badge" id="quiz-verdict-badge">—</span>
+                </div>
+                <p class="quiz-verdict" id="quiz-verdict"></p>
+                <p class="quiz-hint" id="quiz-hint"></p>
+              </div>
+            </form>
+            <aside class="quiz-aside">
+              <div class="figure-slot" data-image="quiz"></div>
+              <div class="quiz-note">
+                <h3>Как считается</h3>
+                <p>Один правильный ответ — один балл. Пять и больше — тест засчитан, раздел «Мини-тест» появится в прогрессе.</p>
+                <p>Ошибся — не страшно: разбор покажет, какой раздел стоит перечитать.</p>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20l5-1 9-9-4-4-9 9-1 5z"/>
+            <path d="M14 6l4 4"/><path d="M17 3l4 4"/><path d="M6 14l4 4"/>
+          </svg>
+        </span>
+        <div>
+          <p class="footer-title">Пайка с нуля</p>
+          <p class="footer-sub">Курс для начинающих радиолюбителей. Работает офлайн.</p>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Быстрые ссылки">
+        <a href="#intro">Старт</a>
+        <a href="#basics">Теория</a>
+        <a href="#practice">Практика</a>
+        <a href="#quiz">Тест</a>
+        <a href="#top">Наверх</a>
+      </nav>
+      <div class="footer-credits">
+        <h3>Источники фотографий</h3>
+        <ul>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Soldering_iron_(UK_Plug).jpg" target="_blank" rel="noopener noreferrer">Soldering iron</a> — oomlout / Bomazi, CC BY-SA 2.0</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:HELPING_HAND_DAN_SOLDERING_IRON.jpg" target="_blank" rel="noopener noreferrer">Helping hand</a> — Abduldedysubhansyah, CC BY-SA 4.0</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Soldering_a_0805.jpg" target="_blank" rel="noopener noreferrer">Soldering a 0805</a> — Aisart, CC BY-SA 3.0</li>
+        </ul>
+        <p>Схемы и текст созданы для этого учебного проекта. Фотографии обрезаны и используются по свободным лицензиям.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 «Пайка с нуля» · учебный проект</span>
+      <span class="footer-offline"><span class="status-dot" aria-hidden="true"></span>Доступно офлайн</span>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-caption">
+    <button class="lightbox-close icon-btn" id="lightbox-close" type="button" aria-label="Закрыть изображение">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img id="lightbox-img" alt="">
+    <p id="lightbox-caption"></p>
+  </dialog>
+
+  <dialog class="confirm-dialog" id="reset-dialog" aria-labelledby="reset-title">
+    <h2 id="reset-title">Сбросить прогресс?</h2>
+    <p>Отметки «изучено» и лучший результат теста удалятся. Тексты и картинки останутся на месте.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" type="button" id="reset-cancel">Отмена</button>
+      <button class="btn btn-danger" type="button" id="reset-confirm">Сбросить</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toast-message"></span>
+    <button class="toast-action" id="toast-action" type="button" hidden>Обновить</button>
+  </div>
+
+  <noscript>
+    <p class="noscript">Для меню, прогресса и теста нужен JavaScript. Тексты уроков доступны и без него.</p>
+  </noscript>
+
+  <script src="js/images.js" defer></script>
+  <script src="js/quiz.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

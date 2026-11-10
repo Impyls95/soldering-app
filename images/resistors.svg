@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Последовательное и параллельное соединение резисторов</title>
+  <desc id="d">При последовательном соединении сопротивления складываются. При параллельном складываются обратные величины, а общее сопротивление меньше меньшего.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e3e8f0" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .t { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; }
+      .m { font-family: 'Segoe UI', Arial, sans-serif; fill: #5a6678; }
+      .tag { font-family: Consolas, 'Courier New', monospace; fill: #b45309; letter-spacing: 2px; }
+      .f { font-family: Consolas, 'Courier New', monospace; fill: #172033; font-weight: 700; }
+      .lbl { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1200" height="750" fill="#f4f6fa"/>
+  <rect width="1200" height="750" fill="url(#grid)" opacity=".7"/>
+  <rect x="60" y="48" width="170" height="38" rx="19" fill="#e8f0ff" stroke="#93b4f5"/>
+  <text class="tag" x="82" y="74" font-size="19">СОЕДИНЕНИЯ</text>
+  <text class="t" x="60" y="145" font-size="44" font-weight="700">Резисторы: два способа включения</text>
+  <text class="m" x="60" y="184" font-size="24">От способа зависит общее сопротивление и ток в цепи.</text>
+
+  <!-- series -->
+  <rect x="60" y="210" width="520" height="455" rx="22" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="90" y="252" class="lbl" font-size="28">Последовательно</text>
+  <text x="90" y="282" class="m" font-size="20">друг за другом — один путь для тока</text>
+
+  <circle cx="105" cy="330" r="16" fill="#fff1e6" stroke="#b45309" stroke-width="3"/>
+  <text x="105" y="337" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="20" font-weight="700" fill="#b45309">+</text>
+  <path d="M121 330h45" stroke="#172033" stroke-width="4"/>
+  <rect x="166" y="313" width="105" height="34" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <path d="M271 330h75" stroke="#172033" stroke-width="4"/>
+  <rect x="346" y="313" width="105" height="34" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <path d="M451 330h70v130H105" stroke="#172033" stroke-width="4" fill="none"/>
+  <circle cx="105" cy="460" r="16" fill="#e2e8f0" stroke="#475569" stroke-width="3"/>
+  <text x="105" y="467" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="20" font-weight="700" fill="#475569">−</text>
+
+  <text x="218" y="372" text-anchor="middle" class="lbl" font-size="24">R1</text>
+  <text x="398" y="372" text-anchor="middle" class="lbl" font-size="24">R2</text>
+
+  <rect x="90" y="512" width="460" height="121" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="112" y="552" class="f" font-size="30">R = R1 + R2</text>
+  <text x="112" y="594" class="m" font-size="21">100 Ом + 100 Ом = 200 Ом</text>
+  <text x="112" y="620" class="m" font-size="18">ток везде одинаковый</text>
+
+  <!-- parallel -->
+  <rect x="620" y="210" width="520" height="455" rx="22" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="650" y="252" class="lbl" font-size="28">Параллельно</text>
+  <text x="650" y="282" class="m" font-size="20">две ветки — ток делится</text>
+
+  <circle cx="665" cy="330" r="16" fill="#fff1e6" stroke="#b45309" stroke-width="3"/>
+  <text x="665" y="337" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="20" font-weight="700" fill="#b45309">+</text>
+  <path d="M681 330h324" stroke="#172033" stroke-width="4"/>
+  <path d="M745 330v90M745 490v55M875 330v90M875 490v55" stroke="#172033" stroke-width="4"/>
+  <rect x="718" y="420" width="54" height="70" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <rect x="848" y="420" width="54" height="70" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <path d="M745 545h130M665 545h80M875 545h130" stroke="#172033" stroke-width="4"/>
+  <circle cx="665" cy="545" r="16" fill="#e2e8f0" stroke="#475569" stroke-width="3"/>
+  <text x="665" y="552" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="20" font-weight="700" fill="#475569">−</text>
+
+  <text x="745" y="408" text-anchor="middle" class="lbl" font-size="22">R1</text>
+  <text x="875" y="408" text-anchor="middle" class="lbl" font-size="22">R2</text>
+
+  <rect x="650" y="572" width="460" height="61" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="670" y="602" class="f" font-size="27">1/R = 1/R1 + 1/R2</text>
+  <text x="670" y="625" class="m" font-size="18">100 Ом и 100 Ом → 50 Ом</text>
+</svg>

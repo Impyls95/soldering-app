@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Биполярный транзистор NPN</title>
+  <desc id="d">Слева обозначение NPN-транзистора с выводами база, коллектор и эмиттер. Справа схема включения: нагрузка в цепи коллектора, резистор в цепи базы, эмиттер на земле.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e3e8f0" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#b45309"/>
+    </marker>
+    <style>
+      .t { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; }
+      .m { font-family: 'Segoe UI', Arial, sans-serif; fill: #5a6678; }
+      .tag { font-family: Consolas, 'Courier New', monospace; fill: #b45309; letter-spacing: 2px; }
+      .f { font-family: Consolas, 'Courier New', monospace; fill: #172033; font-weight: 700; }
+      .lbl { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1200" height="750" fill="#f4f6fa"/>
+  <rect width="1200" height="750" fill="url(#grid)" opacity=".7"/>
+  <rect x="60" y="48" width="170" height="38" rx="19" fill="#e8f0ff" stroke="#93b4f5"/>
+  <text class="tag" x="82" y="74" font-size="19">ТРАНЗИСТОР</text>
+  <text class="t" x="60" y="145" font-size="44" font-weight="700">Биполярный транзистор NPN</text>
+  <text class="m" x="60" y="184" font-size="24">Маленький ток базы управляет большим током коллектора.</text>
+
+  <!-- symbol -->
+  <rect x="60" y="210" width="470" height="470" rx="22" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="90" y="252" class="lbl" font-size="26">Обозначение и выводы</text>
+  <circle cx="290" cy="420" r="135" fill="#f8fafc" stroke="#94a3b8" stroke-width="3"/>
+  <path d="M250 330v180" stroke="#172033" stroke-width="10" stroke-linecap="round"/>
+  <path d="M135 420h115" stroke="#172033" stroke-width="5"/>
+  <path d="M250 375l100-65v-45" stroke="#172033" stroke-width="5" fill="none"/>
+  <path d="M250 465l100 65v45" stroke="#172033" stroke-width="5" fill="none"/>
+  <path d="M320 505l30 25-38 8z" fill="#172033"/>
+  <circle cx="350" cy="265" r="6" fill="#172033"/>
+  <circle cx="350" cy="575" r="6" fill="#172033"/>
+  <text x="140" y="400" class="lbl" font-size="26">Б</text>
+  <text x="122" y="445" class="m" font-size="18">база</text>
+  <text x="365" y="262" class="lbl" font-size="26">К</text>
+  <text x="375" y="300" class="m" font-size="18">коллектор</text>
+  <text x="365" y="585" class="lbl" font-size="26">Э</text>
+  <text x="375" y="620" class="m" font-size="18">эмиттер</text>
+  <text x="90" y="656" class="m" font-size="18">Стрелка на эмиттере направлена наружу — это NPN.</text>
+
+  <!-- circuit -->
+  <rect x="570" y="210" width="570" height="470" rx="22" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="600" y="252" class="lbl" font-size="26">Схема включения</text>
+
+  <path d="M680 300h350" stroke="#172033" stroke-width="4"/>
+  <text x="700" y="288" class="m" font-size="19">+9 В</text>
+  <rect x="900" y="318" width="40" height="70" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <text x="960" y="352" class="lbl" font-size="21">Rк 470 Ω</text>
+  <text x="960" y="378" class="m" font-size="18">нагрузка</text>
+  <path d="M920 300v18M920 388v52" stroke="#172033" stroke-width="4"/>
+
+  <circle cx="860" cy="500" r="62" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M835 445v110" stroke="#172033" stroke-width="8" stroke-linecap="round"/>
+  <path d="M740 500h95" stroke="#172033" stroke-width="4"/>
+  <path d="M835 470l55-35h30v-47" stroke="#172033" stroke-width="4" fill="none"/>
+  <path d="M835 530l55 35v55" stroke="#172033" stroke-width="4" fill="none"/>
+  <path d="M870 555l25 20-32 6z" fill="#172033"/>
+
+  <rect x="650" y="481" width="70" height="38" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <text x="685" y="506" text-anchor="middle" class="lbl" font-size="18">10 к</text>
+  <circle cx="610" cy="500" r="18" fill="#e8f0ff" stroke="#2563eb" stroke-width="3"/>
+  <text x="610" y="506" text-anchor="middle" class="lbl" font-size="15" fill="#1d4ed8">3 В</text>
+  <path d="M628 500h22" stroke="#172033" stroke-width="4"/>
+  <path d="M860 620h60M875 636h30M888 652h4" stroke="#172033" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="790" y="482" text-anchor="middle" class="lbl" font-size="19">Б</text>
+  <text x="945" y="455" class="lbl" font-size="19">К</text>
+  <text x="945" y="590" class="lbl" font-size="19">Э</text>
+
+  <text x="600" y="665" class="m" font-size="18">Ток базы открывает переход — через коллектор идёт ток нагрузки.</text>
+</svg>

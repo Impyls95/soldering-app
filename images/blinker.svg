@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Мигалка на двух транзисторах</title>
+  <desc id="d">Схема мультивибратора: два NPN-транзистора, два конденсатора по 100 микрофарад, четыре резистора и два светодиода в цепях эмиттеров. Конденсаторы поочерёдно открывают транзисторы.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e3e8f0" stroke-width="1"/>
+    </pattern>
+    <style>
+      .t { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; }
+      .m { font-family: 'Segoe UI', Arial, sans-serif; fill: #5a6678; }
+      .tag { font-family: Consolas, 'Courier New', monospace; fill: #b45309; letter-spacing: 2px; }
+      .f { font-family: Consolas, 'Courier New', monospace; fill: #172033; font-weight: 700; }
+      .lbl { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1200" height="750" fill="#f4f6fa"/>
+  <rect width="1200" height="750" fill="url(#grid)" opacity=".7"/>
+  <rect x="60" y="48" width="150" height="38" rx="19" fill="#e8f0ff" stroke="#93b4f5"/>
+  <text class="tag" x="82" y="74" font-size="19">СХЕМА</text>
+  <text class="t" x="60" y="145" font-size="42" font-weight="700">Мигалка на двух транзисторах</text>
+  <text class="m" x="60" y="182" font-size="22">Классический мультивибратор: 2 транзистора, 2 конденсатора, 4 резистора.</text>
+
+  <!-- rails -->
+  <path d="M180 225h840" stroke="#172033" stroke-width="4"/>
+  <circle cx="150" cy="225" r="19" fill="#fff1e6" stroke="#b45309" stroke-width="3"/>
+  <text x="150" y="231" text-anchor="middle" class="lbl" font-size="14" fill="#b45309">+9 В</text>
+  <path d="M169 225h11" stroke="#172033" stroke-width="4"/>
+  <path d="M180 600h840" stroke="#172033" stroke-width="4"/>
+  <path d="M570 600h60M585 618h30M597 636h6" stroke="#172033" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- R1 + collector Q1 -->
+  <path d="M300 225v25" stroke="#172033" stroke-width="4"/>
+  <rect x="278" y="250" width="44" height="65" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <text x="238" y="278" class="lbl" font-size="20">R1</text>
+  <text x="238" y="302" class="m" font-size="17">470</text>
+  <path d="M300 315v25" stroke="#172033" stroke-width="4"/>
+
+  <!-- R3 + collector Q2 -->
+  <path d="M900 225v25" stroke="#172033" stroke-width="4"/>
+  <rect x="878" y="250" width="44" height="65" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <text x="935" y="278" class="lbl" font-size="20">R3</text>
+  <text x="935" y="302" class="m" font-size="17">470</text>
+  <path d="M900 315v25" stroke="#172033" stroke-width="4"/>
+
+  <!-- Q1 -->
+  <path d="M380 360v80" stroke="#172033" stroke-width="8" stroke-linecap="round"/>
+  <path d="M380 360l-80-20" stroke="#172033" stroke-width="4"/>
+  <path d="M380 440l-80 40" stroke="#172033" stroke-width="4"/>
+  <path d="M340 450l-30 20 32 10z" fill="#172033"/>
+  <path d="M300 480v5" stroke="#172033" stroke-width="4"/>
+  <text x="400" y="372" class="lbl" font-size="20">Q1</text>
+  <text x="400" y="470" class="m" font-size="16">NPN</text>
+
+  <!-- Q2 -->
+  <path d="M820 360v80" stroke="#172033" stroke-width="8" stroke-linecap="round"/>
+  <path d="M820 360l80-20" stroke="#172033" stroke-width="4"/>
+  <path d="M820 440l80 40" stroke="#172033" stroke-width="4"/>
+  <path d="M860 450l30 20-32 10z" fill="#172033"/>
+  <path d="M900 480v5" stroke="#172033" stroke-width="4"/>
+  <text x="790" y="372" text-anchor="end" class="lbl" font-size="20">Q2</text>
+  <text x="780" y="470" class="m" font-size="16">NPN</text>
+
+  <!-- base leads -->
+  <path d="M380 400h100" stroke="#172033" stroke-width="4"/>
+  <path d="M820 400h-120" stroke="#172033" stroke-width="4"/>
+
+  <!-- base resistors -->
+  <path d="M480 225v25" stroke="#172033" stroke-width="4"/>
+  <rect x="458" y="250" width="44" height="80" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <path d="M480 330v70" stroke="#172033" stroke-width="4"/>
+  <circle cx="480" cy="400" r="5" fill="#172033"/>
+  <text x="510" y="286" class="lbl" font-size="19">R2</text>
+  <text x="510" y="310" class="m" font-size="16">10 к</text>
+
+  <path d="M700 225v25" stroke="#172033" stroke-width="4"/>
+  <rect x="678" y="250" width="44" height="80" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/>
+  <path d="M700 330v70" stroke="#172033" stroke-width="4"/>
+  <circle cx="700" cy="400" r="5" fill="#172033"/>
+  <text x="650" y="286" text-anchor="end" class="lbl" font-size="19">R4</text>
+  <text x="650" y="310" text-anchor="end" class="m" font-size="16">10 к</text>
+
+  <!-- C1 -->
+  <path d="M300 340h170M470 340q10 -18 20 0M490 340h60M570 340h50M620 340h80v60" stroke="#172033" stroke-width="4" fill="none"/>
+  <path d="M550 310v60M570 310v60" stroke="#172033" stroke-width="6" stroke-linecap="round"/>
+  <text x="538" y="302" class="lbl" font-size="18" fill="#b45309">+</text>
+  <text x="560" y="432" text-anchor="middle" class="lbl" font-size="19">C1</text>
+  <text x="560" y="456" text-anchor="middle" class="m" font-size="16">100 мкФ</text>
+
+  <!-- C2 -->
+  <path d="M900 340h-220v140M680 480h-20M660 480h-80v-80h-100" stroke="#172033" stroke-width="4" fill="none"/>
+  <path d="M660 450v60M640 450v60" stroke="#172033" stroke-width="6" stroke-linecap="round"/>
+  <text x="652" y="442" class="lbl" font-size="18" fill="#b45309">+</text>
+  <text x="600" y="530" text-anchor="middle" class="lbl" font-size="19">C2</text>
+  <text x="600" y="554" text-anchor="middle" class="m" font-size="16">100 мкФ</text>
+
+  <!-- LEDs in emitters -->
+  <path d="M300 485l60 0-30 40z" fill="#fca5a5" stroke="#b91c1c" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M270 525h60" stroke="#b91c1c" stroke-width="5"/>
+  <path d="M300 525v75" stroke="#172033" stroke-width="4"/>
+  <path d="M330 472l25-25M350 490l25-25" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <text x="238" y="505" class="m" font-size="16">D1</text>
+
+  <path d="M900 485l60 0-30 40z" fill="#fca5a5" stroke="#b91c1c" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M870 525h60" stroke="#b91c1c" stroke-width="5"/>
+  <path d="M900 525v75" stroke="#172033" stroke-width="4"/>
+  <path d="M930 472l25-25M950 490l25-25" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <text x="960" y="505" class="m" font-size="16">D2</text>
+
+  <!-- formula -->
+  <rect x="60" y="660" width="1080" height="60" rx="14" fill="#fff7ed" stroke="#f0b27a"/>
+  <text x="84" y="699" class="f" font-size="21">T ≈ 1,4 × R2 × C1</text>
+  <text x="380" y="699" class="m" font-size="19">при 10 кОм и 100 мкФ период ≈ 1,4 с, частота ≈ 0,7 Гц</text>
+  <text x="900" y="699" class="m" font-size="17">R1, R3 — ток LED</text>
+  <circle cx="300" cy="340" r="5" fill="#172033"/>
+  <circle cx="900" cy="340" r="5" fill="#172033"/>
+  <circle cx="480" cy="400" r="5" fill="#172033"/>
+  <circle cx="700" cy="400" r="5" fill="#172033"/>
+</svg>

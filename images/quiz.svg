@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Мини-тест по пайке и электронике</title>
+  <desc id="d">Иллюстрация к тесту: знак вопроса на фоне печатной платы, семь индикаторов и результат пять из семи.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e3e8f0" stroke-width="1"/>
+    </pattern>
+    <style>
+      .t { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; }
+      .m { font-family: 'Segoe UI', Arial, sans-serif; fill: #5a6678; }
+      .tag { font-family: Consolas, 'Courier New', monospace; fill: #b45309; letter-spacing: 2px; }
+      .lbl { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1200" height="750" fill="#f4f6fa"/>
+  <rect width="1200" height="750" fill="url(#grid)" opacity=".7"/>
+  <rect x="60" y="48" width="170" height="38" rx="19" fill="#e8f0ff" stroke="#93b4f5"/>
+  <text class="tag" x="82" y="74" font-size="19">САМОПРОВЕРКА</text>
+  <text class="t" x="60" y="145" font-size="44" font-weight="700">Мини-тест: 7 вопросов</text>
+  <text class="m" x="60" y="184" font-size="24">Без оценок и дедлайнов — просто проверь, что отложилось.</text>
+
+  <rect x="60" y="220" width="620" height="450" rx="26" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <g opacity=".6" stroke="#bbf7d0" stroke-width="10" fill="none" stroke-linecap="round">
+    <path d="M100 290h130v80h90M100 600h100v-90h120M540 270v90h90M560 610v-70h70"/>
+    <circle cx="100" cy="290" r="8" fill="#bbf7d0" stroke="none"/>
+    <circle cx="540" cy="270" r="8" fill="#bbf7d0" stroke="none"/>
+    <circle cx="560" cy="610" r="8" fill="#bbf7d0" stroke="none"/>
+  </g>
+  <circle cx="370" cy="445" r="125" fill="#fff7ed" stroke="#f0b27a" stroke-width="3"/>
+  <text x="370" y="505" text-anchor="middle" font-family="'Segoe UI', Arial" font-size="150" font-weight="700" fill="#b45309">?</text>
+  <circle cx="285" cy="350" r="9" fill="#f59e0b"/>
+  <circle cx="455" cy="350" r="9" fill="#f59e0b"/>
+  <circle cx="285" cy="540" r="9" fill="#f59e0b"/>
+  <circle cx="455" cy="540" r="9" fill="#f59e0b"/>
+
+  <rect x="720" y="220" width="420" height="450" rx="26" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="750" y="266" class="lbl" font-size="24">Пример результата</text>
+
+  <g>
+    <circle cx="770" cy="330" r="18" fill="#16a34a"/>
+    <path d="M762 330l5 6 11-13" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="825" cy="330" r="18" fill="#16a34a"/>
+    <path d="M817 330l5 6 11-13" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="880" cy="330" r="18" fill="#16a34a"/>
+    <path d="M872 330l5 6 11-13" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="935" cy="330" r="18" fill="#16a34a"/>
+    <path d="M927 330l5 6 11-13" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="990" cy="330" r="18" fill="#16a34a"/>
+    <path d="M982 330l5 6 11-13" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="1045" cy="330" r="18" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+    <circle cx="1100" cy="330" r="18" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+  </g>
+
+  <text x="750" y="470" font-family="'Segoe UI', Arial" font-size="72" font-weight="700" fill="#172033">5 / 7</text>
+  <text x="750" y="508" class="m" font-size="21">проходной балл — 5</text>
+  <rect x="750" y="540" width="360" height="88" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="770" y="574" class="m" font-size="18">Ошибся — не страшно.</text>
+  <text x="770" y="602" class="m" font-size="18">Разбор ответов всё объяснит.</text>
+</svg>

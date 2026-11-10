@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Изображение недоступно</title>
+  <desc id="d">Серая заглушка: файл картинки не найден. Замените его в папке images, не меняя код.</desc>
+  <rect width="1200" height="750" fill="#d7dce3"/>
+  <rect x="40" y="40" width="1120" height="670" rx="24" fill="none" stroke="#9aa5b1" stroke-width="4" stroke-dasharray="18 12"/>
+  <g stroke="#6b7280" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="470" y="250" width="260" height="180" rx="14"/>
+    <circle cx="535" cy="310" r="22"/>
+    <path d="M470 405l80-80 55 55 35-35 90 60"/>
+  </g>
+  <text x="600" y="505" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="700" fill="#374151">Изображение недоступно</text>
+  <text x="600" y="552" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="24" fill="#4b5563">Файл не найден. Замените его в папке images/ —</text>
+  <text x="600" y="586" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="24" fill="#4b5563">код и конфигурацию менять не нужно.</text>
+</svg>

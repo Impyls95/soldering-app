@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="t d">
+  <title id="t">Закон Ома</title>
+  <desc id="d">Треугольник U равно I умножить на R. Три формы закона Ома и пример: 9 вольт разделить на 450 ом равно 20 миллиампер.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e3e8f0" stroke-width="1"/>
+    </pattern>
+    <style>
+      .t { font-family: 'Segoe UI', Arial, sans-serif; fill: #172033; }
+      .m { font-family: 'Segoe UI', Arial, sans-serif; fill: #5a6678; }
+      .tag { font-family: Consolas, 'Courier New', monospace; fill: #b45309; letter-spacing: 2px; }
+      .f { font-family: Consolas, 'Courier New', monospace; fill: #172033; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="1200" height="750" fill="#f4f6fa"/>
+  <rect width="1200" height="750" fill="url(#grid)" opacity=".7"/>
+  <rect x="60" y="48" width="150" height="38" rx="19" fill="#e8f0ff" stroke="#93b4f5"/>
+  <text class="tag" x="82" y="74" font-size="19">ФОРМУЛА</text>
+  <text class="t" x="60" y="145" font-size="44" font-weight="700">Закон Ома</text>
+  <text class="m" x="60" y="184" font-size="24">U, I и R связаны одной формулой.</text>
+
+  <!-- triangle -->
+  <path d="M330 220L170 480h320z" fill="#ffffff" stroke="#172033" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M330 405V480M250 405h160" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="330" y="350" text-anchor="middle" class="f" font-size="56" fill="#b45309">U</text>
+  <text x="258" y="455" text-anchor="middle" class="f" font-size="56" fill="#0f766e">I</text>
+  <text x="405" y="455" text-anchor="middle" class="f" font-size="56" fill="#2563eb">R</text>
+  <text x="70" y="520" class="m" font-size="20">U — напряжение</text>
+  <text x="70" y="548" class="m" font-size="20">I — ток</text>
+  <text x="70" y="576" class="m" font-size="20">R — сопротивление</text>
+
+  <!-- formulas -->
+  <rect x="560" y="170" width="580" height="88" rx="16" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="585" y="225" class="f" font-size="38">U = I × R</text>
+  <text x="960" y="222" class="m" font-size="24">напряжение</text>
+
+  <rect x="560" y="278" width="580" height="88" rx="16" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="585" y="333" class="f" font-size="38">I = U / R</text>
+  <text x="960" y="330" class="m" font-size="24">ток</text>
+
+  <rect x="560" y="386" width="580" height="88" rx="16" fill="#ffffff" stroke="#e1e7f0" stroke-width="2"/>
+  <text x="585" y="441" class="f" font-size="38">R = U / I</text>
+  <text x="960" y="438" class="m" font-size="24">сопротивление</text>
+
+  <!-- example -->
+  <rect x="560" y="510" width="580" height="150" rx="20" fill="#fff7ed" stroke="#f0b27a" stroke-width="2"/>
+  <text x="588" y="548" class="m" font-size="20" letter-spacing="1">ПРИМЕР</text>
+  <text x="588" y="592" class="f" font-size="30">9 В ÷ 450 Ом = 0,02 А</text>
+  <text x="588" y="632" class="f" font-size="30">0,02 А = 20 мА</text>
+
+  <text x="60" y="640" class="m" font-size="22">Если напряжение 9 В, а резистор 450 Ом,</text>
+  <text x="60" y="674" class="m" font-size="22">через цепь потечёт ток 20 мА.</text>
+
+  <text x="60" y="718" font-family="Consolas, 'Courier New', monospace" font-size="17" fill="#94a3b8">Пайка с нуля · закон Ома</text>
+</svg>
